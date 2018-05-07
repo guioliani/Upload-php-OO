@@ -5,12 +5,13 @@ define('DS', DIRECTORY_SEPARATOR);
 
 require_once(WWW_ROOT . DS . 'config/autoload.php');
 
+use classes\dbFunctions;
 
-//use classes\db;
-use classes\Conection;
 
-$con = new Conection();
-$con->conecta();
-$con->select("SELECT * FROM cliente");
+$query = new DbFunctions();
+$query->conecta();
+$query->insert("INSERT INTO cliente (id, nome, email, telefone) VALUES (3, 'maria', 'maria@email.com', 5215151)");
+$query->delete("DELETE FROM cliente WHERE id = 15454");
+$query->select("SELECT * FROM cliente");
 
 ?>
