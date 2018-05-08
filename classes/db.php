@@ -3,10 +3,11 @@
 namespace classes;
 
 interface DB{
-   public function conecta();
-   public function select($sql);
-   public function insert($sql);
-   public function delete($sql);
+    public function conecta();
+    public function select($sql);
+    public function insert($sql);
+    public function delete($sql);
+    public function update($sql);
 }
 
 ?>
