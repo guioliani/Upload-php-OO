@@ -23,7 +23,7 @@ class DbFunctions implements DB{
         try{
             $this->conexao = new \PDO($this->getDbType().":host=".$this->getHost().";dbname=".$this->getDb(), $this->getUser(), $this->getPass());
         }catch(PDOException $e){
-            die("ERROR: <code>".$e-getMessage(). "</code>");
+            die("ERROR: <code>".$e->getMessage(). "</code>");
         }
         return ($this->conexao);
     } 
@@ -43,16 +43,27 @@ class DbFunctions implements DB{
             $conexao = $this->conecta();
             $query = $conexao->query($sql);
         }catch(PDOException $e){
-            die("ERROR: <code>".$e-getMessage(). "</code>");
+            die("ERROR: <code>".$e->getMessage(). "</code>");
         }
     }
 
+    /*metodo de delete*/
     public function delete($sql){
         try{
             $query = $this->conecta()->prepare($sql);
             $query->execute(array($sql));
         }catch(PDOException $e){
-            die("ERROR: <code>".$e-getMessage(). "</code>");
+            die("ERROR: <code>".$e->getMessage(). "</code>");
+        }
+    }
+
+    /*metodo de update*/
+    public function update($sql){
+        try{
+            $query = $this->conecta()->prepare($sql);
+            $query->execute(array($sql));
+        }catch(PDOException $e){
+            die("ERROR: <code>".$e->getMessage()."</code>");
         }
     }
 }
