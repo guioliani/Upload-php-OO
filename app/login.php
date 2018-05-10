@@ -35,8 +35,8 @@ use \classes\dbFunctions;
 $query = new DbFunctions();
 
 if(isset($_POST["button"])){
-    $email = mysqli_real_escape_string($query->conecta(), $_POST['email']);
-    $senha = mysqli_real_escape_string($query->conecta(), $_POST['senha']);
+    $email =  $_POST['email'];
+    $senha =  md5($_POST['senha']);
 
     if($email == "" || $senha == ""){
         echo "
@@ -45,11 +45,12 @@ if(isset($_POST["button"])){
         </div>";
         return true;
     }
-    $query->select("SELECT id, email, senha, nivel, status FROM usuarios WHERE email = '$email' AND senha = '$senha'
-                    UNION
-                    SELECT id, email, senha, nivel, status FROM administrador WHERE email = '$email' AND senha = '$senha'");
 
-
+    $query->login($email, $senha);
+}elseif(isset($_POST['cadastrar'])){
+    header("Location: cadastro.php");
+}elseif(isset($_POST['home'])){
+    header("Location: ../index.html");
 }
 
 ?>
